@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/shadow1ng/fscan/Common"
-	"github.com/shadow1ng/fscan/Core"
+	"gitfuk.com/fxck/fxckscan/Common"
+	"gitfuk.com/fxck/fxckscan/Core"
 )
 
 func main() {

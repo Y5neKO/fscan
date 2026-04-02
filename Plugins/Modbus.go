@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/binary"
 	"fmt"
-	"github.com/shadow1ng/fscan/Common"
+	"gitfuk.com/fxck/fxckscan/Common"
 	"net"
 	"time"
 )

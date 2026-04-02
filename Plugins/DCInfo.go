@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"github.com/go-ldap/ldap/v3"
 	"github.com/go-ldap/ldap/v3/gssapi"
-	"github.com/shadow1ng/fscan/Common"
+	"gitfuk.com/fxck/fxckscan/Common"
 	"os/exec"
 	"strconv"
 	"strings"

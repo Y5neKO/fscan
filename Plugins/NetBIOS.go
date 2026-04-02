@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"github.com/shadow1ng/fscan/Common"
+	"gitfuk.com/fxck/fxckscan/Common"
 	"gopkg.in/yaml.v3"
 	"net"
 	"strconv"

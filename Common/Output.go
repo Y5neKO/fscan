@@ -69,7 +69,7 @@ func InitOutput() error {
 
 	if ApiAddr != "" {
 		OutputFormat = "csv"
-		Outputfile = filepath.Join(dir, "fscanapi.csv")
+		Outputfile = filepath.Join(dir, "result.csv")
 		Num = 0
 		End = 0
 		if _, err := os.Stat(Outputfile); err == nil {

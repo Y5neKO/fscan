@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"context"
 	"fmt"
-	"github.com/shadow1ng/fscan/Common"
+	"gitfuk.com/fxck/fxckscan/Common"
 	"io"
 	"net"
 	"os"

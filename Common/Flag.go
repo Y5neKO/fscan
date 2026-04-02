@@ -10,50 +10,8 @@ import (
 )
 
 func Banner() {
-	// 定义暗绿色系
-	colors := []color.Attribute{
-		color.FgGreen,   // 基础绿
-		color.FgHiGreen, // 亮绿
-	}
-
-	lines := []string{
-		"   ___                              _    ",
-		"  / _ \\     ___  ___ _ __ __ _  ___| | __ ",
-		" / /_\\/____/ __|/ __| '__/ _` |/ __| |/ /",
-		"/ /_\\\\_____\\__ \\ (__| | | (_| | (__|   <    ",
-		"\\____/     |___/\\___|_|  \\__,_|\\___|_|\\_\\   ",
-	}
-
-	// 获取最长行的长度
-	maxLength := 0
-	for _, line := range lines {
-		if len(line) > maxLength {
-			maxLength = len(line)
-		}
-	}
-
-	// 创建边框
-	topBorder := "┌" + strings.Repeat("─", maxLength+2) + "┐"
-	bottomBorder := "└" + strings.Repeat("─", maxLength+2) + "┘"
-
-	// 打印banner
-	fmt.Println(topBorder)
-
-	for lineNum, line := range lines {
-		fmt.Print("│ ")
-		// 使用对应的颜色打印每个字符
-		c := color.New(colors[lineNum%2])
-		c.Print(line)
-		// 补齐空格
-		padding := maxLength - len(line)
-		fmt.Printf("%s │\n", strings.Repeat(" ", padding))
-	}
-
-	fmt.Println(bottomBorder)
-
-	// 打印版本信息
-	c := color.New(colors[1])
-	c.Printf("      Fscan Version: %s\n\n", version)
+	c := color.New(color.FgGreen)
+	c.Printf("Version: %s\n\n", version)
 }
 
 // Flag 解析命令行参数并配置扫描选项
@@ -253,13 +211,13 @@ func FlagFromRemote(info *HostInfo, argString string) error {
 // parseCommandLineArgs 处理来自环境变量和命令行的参数
 func parseCommandLineArgs() {
 	// 首先检查环境变量中的参数
-	envArgsString := os.Getenv("FS_ARGS")
+	envArgsString := os.Getenv("TOOL_ARGS")
 	if envArgsString != "" {
 		// 解析环境变量参数 (跨平台支持)
 		envArgs, err := parseEnvironmentArgs(envArgsString)
 		if err == nil && len(envArgs) > 0 {
 			flag.CommandLine.Parse(envArgs)
-			os.Unsetenv("FS_ARGS") // 使用后清除环境变量
+			os.Unsetenv("TOOL_ARGS") // 使用后清除环境变量
 			return
 		}
 		// 如果环境变量解析失败，继续使用命令行参数

@@ -3,7 +3,7 @@ package Plugins
 import (
 	"context"
 	"fmt"
-	"github.com/shadow1ng/fscan/Common"
+	"gitfuk.com/fxck/fxckscan/Common"
 	"github.com/stacktitan/smb/smb"
 	"strings"
 	"sync"

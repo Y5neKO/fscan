@@ -2,7 +2,7 @@
 
 package Plugins
 
-import "github.com/shadow1ng/fscan/Common"
+import "gitfuk.com/fxck/fxckscan/Common"
 
 func DCInfoScan(info *Common.HostInfo) (err error) {
 	return nil

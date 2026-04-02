@@ -3,8 +3,8 @@ package Core
 import (
 	"fmt"
 	"github.com/schollz/progressbar/v3"
-	"github.com/shadow1ng/fscan/Common"
-	"github.com/shadow1ng/fscan/WebScan/lib"
+	"gitfuk.com/fxck/fxckscan/Common"
+	"gitfuk.com/fxck/fxckscan/WebScan/lib"
 	"strconv"
 	"strings"
 	"sync"

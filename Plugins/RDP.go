@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/shadow1ng/fscan/Common"
+	"gitfuk.com/fxck/fxckscan/Common"
 	"github.com/tomatome/grdp/core"
 	"github.com/tomatome/grdp/glog"
 	"github.com/tomatome/grdp/protocol/nla"

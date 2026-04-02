@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/shadow1ng/fscan/Common"
+	"gitfuk.com/fxck/fxckscan/Common"
 )
 
 const (

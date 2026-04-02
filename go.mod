@@ -1,4 +1,4 @@
-module github.com/shadow1ng/fscan
+module gitfuk.com/fxck/fxckscan
 
 go 1.20
 

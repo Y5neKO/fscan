@@ -13,8 +13,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/shadow1ng/fscan/Common"
-	"github.com/shadow1ng/fscan/WebScan/lib"
+	"gitfuk.com/fxck/fxckscan/Common"
+	"gitfuk.com/fxck/fxckscan/WebScan/lib"
 )
 
 // 常量定义
@@ -169,7 +169,7 @@ func createBaseRequest(ctx context.Context, target string) (*http.Request, error
 	// 设置请求头
 	req.Header.Set("User-agent", Common.UserAgent)
 	req.Header.Set("Accept", Common.Accept)
-	req.Header.Set("Accept-Language", "zh-CN,zh;q=0.9")
+	req.Header.Set("Accept-Language", "en-US,en;q=0.9")
 	if Common.Cookie != "" {
 		req.Header.Set("Cookie", Common.Cookie)
 	}

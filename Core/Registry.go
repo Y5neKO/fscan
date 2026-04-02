@@ -1,8 +1,8 @@
 package Core
 
 import (
-	"github.com/shadow1ng/fscan/Common"
-	"github.com/shadow1ng/fscan/Plugins"
+	"gitfuk.com/fxck/fxckscan/Common"
+	"gitfuk.com/fxck/fxckscan/Plugins"
 	"sort"
 )
 

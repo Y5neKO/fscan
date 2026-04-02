@@ -14,9 +14,9 @@ import (
 	"time"
 	"unicode/utf8"
 
-	"github.com/shadow1ng/fscan/Common"
-	"github.com/shadow1ng/fscan/WebScan"
-	"github.com/shadow1ng/fscan/WebScan/lib"
+	"gitfuk.com/fxck/fxckscan/Common"
+	"gitfuk.com/fxck/fxckscan/WebScan"
+	"gitfuk.com/fxck/fxckscan/WebScan/lib"
 	"golang.org/x/text/encoding/simplifiedchinese"
 )
 
@@ -222,11 +222,10 @@ func fetchUrl(targetUrl string, followRedirect bool) (*WebResponse, error) {
 	// 设置请求头
 	req.Header.Set("User-agent", Common.UserAgent)
 	req.Header.Set("Accept", Common.Accept)
-	req.Header.Set("Accept-Language", "zh-CN,zh;q=0.9")
+	req.Header.Set("Accept-Language", "en-US,en;q=0.9")
 	if Common.Cookie != "" {
 		req.Header.Set("Cookie", Common.Cookie)
 	}
-	req.Header.Set("Connection", "close")
 
 	// 选择HTTP客户端
 	var client *http.Client

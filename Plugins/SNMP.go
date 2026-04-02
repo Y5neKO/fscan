@@ -3,7 +3,7 @@ package Plugins
 import (
 	"fmt"
 	"github.com/gosnmp/gosnmp"
-	"github.com/shadow1ng/fscan/Common"
+	"gitfuk.com/fxck/fxckscan/Common"
 	"strconv"
 	"strings"
 	"time"

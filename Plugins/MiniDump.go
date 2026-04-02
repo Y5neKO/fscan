@@ -4,7 +4,7 @@ package Plugins
 
 import (
 	"fmt"
-	"github.com/shadow1ng/fscan/Common"
+	"gitfuk.com/fxck/fxckscan/Common"
 	"golang.org/x/sys/windows"
 	"os"
 	"path/filepath"
@@ -305,7 +305,7 @@ func MiniDump(info *Common.HostInfo) (err error) {
 	Common.LogSuccess("成功提升进程权限")
 
 	// 创建输出路径
-	outputPath := filepath.Join(".", fmt.Sprintf("fscan-%d.dmp", pid))
+	outputPath := filepath.Join(".", fmt.Sprintf("dump-%d.dmp", pid))
 
 	// 执行转储
 	if err := pm.DumpProcess(pid, outputPath); err != nil {

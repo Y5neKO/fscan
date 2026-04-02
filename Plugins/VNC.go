@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/mitchellh/go-vnc"
-	"github.com/shadow1ng/fscan/Common"
+	"gitfuk.com/fxck/fxckscan/Common"
 	"net"
 	"sync"
 	"time"

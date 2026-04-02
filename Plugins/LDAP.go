@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/go-ldap/ldap/v3"
-	"github.com/shadow1ng/fscan/Common"
+	"gitfuk.com/fxck/fxckscan/Common"
 	"net"
 	"strings"
 	"sync"
