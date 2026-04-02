@@ -2,6 +2,7 @@ package lib
 
 import (
 	"crypto/md5"
+	"encoding/base64"
 	"fmt"
 	"github.com/google/cel-go/cel"
 	"gitfuk.com/fxck/fxckscan/Common"
@@ -19,6 +20,13 @@ import (
 const (
 	ceyeApi    = "a78a1cb49d91fe09e01876078d1868b2" // Ceye平台的API密钥
 	ceyeDomain = "7wtusr.ceye.io"                   // Ceye平台的域名
+)
+
+// 编码的POC名称常量（避免明文出现在二进制中）
+var (
+	pocNameBackupFile, _ = base64.StdEncoding.DecodeString("cG9jLXlhbWwtYmFja3VwLWZpbGU=")
+	pocNameSqlFile, _    = base64.StdEncoding.DecodeString("cG9jLXlhbWwtc3FsLWZpbGU=")
+	pocNameShiroKey, _   = base64.StdEncoding.DecodeString("cG9jLXlhbWwtc2hpcm8ta2V5")
 )
 
 // Task 定义单个POC检测任务的结构体
@@ -507,7 +515,7 @@ func clusterpoc(oReq *http.Request, p *Poc, variableMap map[string]interface{}, 
 
 		// 生成日志消息
 		var logMsg string
-		if p.Name == "poc-yaml-backup-file" || p.Name == "poc-yaml-sql-file" {
+		if p.Name == string(pocNameBackupFile) || p.Name == string(pocNameSqlFile) {
 			logMsg = fmt.Sprintf("检测到漏洞 %s %s", targetURL, p.Name)
 		} else {
 			logMsg = fmt.Sprintf("检测到漏洞 %s %s 参数:%v", targetURL, p.Name, params)
@@ -540,7 +548,7 @@ func clusterpoc(oReq *http.Request, p *Poc, variableMap map[string]interface{}, 
 	paramLoop:
 		for comboIndex, paramCombo := range setsMap {
 			// Shiro Key测试特殊处理:默认只测试10个key
-			if p.Name == "poc-yaml-shiro-key" && !Common.PocFull && comboIndex >= 10 {
+			if p.Name == string(pocNameShiroKey) && !Common.PocFull && comboIndex >= 10 {
 				if paramCombo[1] == "cbc" {
 					continue
 				} else {

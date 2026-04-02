@@ -1,6 +1,8 @@
 module gitfuk.com/fxck/fxckscan
 
-go 1.20
+go 1.22
+
+toolchain go1.24.3
 
 require (
 	github.com/IBM/sarama v1.43.3

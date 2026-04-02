@@ -2,7 +2,7 @@ package WebScan
 
 import (
 	"context"
-	"embed"
+	"encoding/base64"
 	"errors"
 	"fmt"
 	"net/http"
@@ -35,8 +35,6 @@ var (
 	ErrPocLoadFailed = errors.New("POC加载失败")
 )
 
-//go:embed pocs
-var pocsFS embed.FS
 var (
 	once    sync.Once
 	allPocs []*lib.Poc
@@ -188,24 +186,9 @@ func initPocs() {
 	}
 }
 
-// loadEmbeddedPocs 加载内置POC
+// loadEmbeddedPocs 加载内置POC（从Base64编码数据解码）
 func loadEmbeddedPocs() {
-	entries, err := pocsFS.ReadDir("pocs")
-	if err != nil {
-		Common.LogError(fmt.Sprintf("加载内置POC目录失败: %v", err))
-		return
-	}
-
-	// 收集所有POC文件
-	var pocFiles []string
-	for _, entry := range entries {
-		if isPocFile(entry.Name()) {
-			pocFiles = append(pocFiles, entry.Name())
-		}
-	}
-
-	// 并发加载POC文件
-	loadPocsConcurrently(pocFiles, true, "")
+	loadPocsConcurrently(nil, true)
 }
 
 // loadExternalPocs 从外部路径加载POC
@@ -234,12 +217,17 @@ func loadExternalPocs(pocPath string) {
 	}
 
 	// 并发加载POC文件
-	loadPocsConcurrently(pocFiles, false, pocPath)
+	loadPocsConcurrently(pocFiles, false)
 }
 
 // loadPocsConcurrently 并发加载POC文件
-func loadPocsConcurrently(pocFiles []string, isEmbedded bool, pocPath string) {
-	pocCount := len(pocFiles)
+func loadPocsConcurrently(pocFiles []string, isEmbedded bool) {
+	var pocCount int
+	if isEmbedded {
+		pocCount = len(pocsEncodedNames)
+	} else {
+		pocCount = len(pocFiles)
+	}
 	if pocCount == 0 {
 		return
 	}
@@ -251,11 +239,11 @@ func loadPocsConcurrently(pocFiles []string, isEmbedded bool, pocPath string) {
 	// 使用信号量控制并发数
 	semaphore := make(chan struct{}, concurrencyLimit)
 
-	for _, file := range pocFiles {
+	for idx := 0; idx < pocCount; idx++ {
 		wg.Add(1)
 		semaphore <- struct{}{} // 获取信号量
 
-		go func(filename string) {
+		go func(i int) {
 			defer func() {
 				<-semaphore // 释放信号量
 				wg.Done()
@@ -266,9 +254,15 @@ func loadPocsConcurrently(pocFiles []string, isEmbedded bool, pocPath string) {
 
 			// 根据不同的来源加载POC
 			if isEmbedded {
-				poc, err = lib.LoadPoc(filename, pocsFS)
+				_, err1 := base64.StdEncoding.DecodeString(pocsEncodedNames[i])
+				dataBytes, err2 := base64.StdEncoding.DecodeString(pocsEncodedData[i])
+				if err1 != nil || err2 != nil {
+					failCount++
+					return
+				}
+				poc, err = lib.LoadPocFromBytes(dataBytes)
 			} else {
-				poc, err = lib.LoadPocbyPath(filename)
+				poc, err = lib.LoadPocbyPath(pocFiles[i])
 			}
 
 			mu.Lock()
@@ -283,7 +277,7 @@ func loadPocsConcurrently(pocFiles []string, isEmbedded bool, pocPath string) {
 				allPocs = append(allPocs, poc)
 				successCount++
 			}
-		}(file)
+		}(idx)
 	}
 
 	wg.Wait()

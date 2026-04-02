@@ -281,6 +281,17 @@ func LoadPoc(fileName string, Pocs embed.FS) (*Poc, error) {
 	return p, err
 }
 
+// LoadPocFromBytes 从字节数据加载单个POC
+func LoadPocFromBytes(data []byte) (*Poc, error) {
+	p := &Poc{}
+	err := yaml.Unmarshal(data, p)
+	if err != nil {
+		fmt.Printf("POC解析失败: %v\n", err)
+		return nil, err
+	}
+	return p, err
+}
+
 // SelectPoc 根据名称关键字选择POC文件
 func SelectPoc(Pocs embed.FS, pocname string) []string {
 	entries, err := Pocs.ReadDir("pocs")
