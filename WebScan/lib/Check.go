@@ -2,7 +2,6 @@ package lib
 
 import (
 	"crypto/md5"
-	"encoding/base64"
 	"fmt"
 	"github.com/google/cel-go/cel"
 	"gitfuk.com/fxck/fxckscan/Common"
@@ -24,9 +23,9 @@ const (
 
 // 编码的POC名称常量（避免明文出现在二进制中）
 var (
-	pocNameBackupFile, _ = base64.StdEncoding.DecodeString("cG9jLXlhbWwtYmFja3VwLWZpbGU=")
-	pocNameSqlFile, _    = base64.StdEncoding.DecodeString("cG9jLXlhbWwtc3FsLWZpbGU=")
-	pocNameShiroKey, _   = base64.StdEncoding.DecodeString("cG9jLXlhbWwtc2hpcm8ta2V5")
+	pocNameBackupFile, _ = Common.WordDecode("dam gap owl ken log yak mud ice cop web ant via zap nod fin ken bid hat van ant log web age rag cop gap urn =")
+	pocNameSqlFile, _    = Common.WordDecode("dam gap owl ken log yak mud ice cop web ant via dam hat fin usb log web age rag cop gap urn =")
+	pocNameShiroKey, _   = Common.WordDecode("dam gap owl ken log yak mud ice cop web ant via dam gem ice rag dam nod nap via bid gem van key")
 )
 
 // Task 定义单个POC检测任务的结构体

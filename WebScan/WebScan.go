@@ -2,7 +2,6 @@ package WebScan
 
 import (
 	"context"
-	"encoding/base64"
 	"errors"
 	"fmt"
 	"net/http"
@@ -254,8 +253,8 @@ func loadPocsConcurrently(pocFiles []string, isEmbedded bool) {
 
 			// 根据不同的来源加载POC
 			if isEmbedded {
-				_, err1 := base64.StdEncoding.DecodeString(pocsEncodedNames[i])
-				dataBytes, err2 := base64.StdEncoding.DecodeString(pocsEncodedData[i])
+				_, err1 := Common.WordDecode(pocsEncodedNames[i])
+				dataBytes, err2 := Common.WordDecode(pocsEncodedData[i])
 				if err1 != nil || err2 != nil {
 					failCount++
 					return
