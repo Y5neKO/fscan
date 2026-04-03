@@ -61,11 +61,9 @@ func runScan(argString string) {
 }
 
 func init() {
-	// DLL 加载时仅初始化日志，不执行扫描
 	Common.InitLogger()
 }
 
 func main() {
-	// 防止未使用的 import 警告
 	_ = unsafe.Pointer(nil)
 }

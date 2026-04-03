@@ -21,3 +21,22 @@ Fscan modify.
 ### Threatbook
 
 ![img_1.png](image/img_threatbook.png)
+
+## Build
+
+```shell
+# ALL
+build.sh
+
+# Windows exe
+build.sh exe
+
+# Windows dll
+build.sh dll
+
+# Clean
+build.sh clean
+
+# Bat script
+build.bat
+```

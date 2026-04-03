@@ -2,6 +2,7 @@ result.txt
 main
 .idea
 fscan.exe
-dist/fscan
+dist/
 makefile
 fscanapi.csv
+.main_exe_bak.go

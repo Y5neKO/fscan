@@ -20,7 +20,6 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    // 拼接参数字符串
     char argBuf[4096] = {0};
     int i;
     for (i = 2; i < argc; i++) {
