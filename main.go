@@ -1,31 +1,46 @@
 package main
 
+import "C"
+
 import (
 	"fmt"
-	"os"
+	"time"
 
 	"gitfuk.com/fxck/fxckscan/Common"
 	"gitfuk.com/fxck/fxckscan/Core"
 )
 
-func main() {
+//export Run
+func Run() {}
+
+//export Start
+func Start() {}
+
+//export Execute
+func Execute() {}
+
+func init() {
+	start := time.Now()
+
 	Common.InitLogger()
 
 	var Info Common.HostInfo
 	Common.Flag(&Info)
 
-	// 解析 CLI 参数
 	if err := Common.Parse(&Info); err != nil {
-		os.Exit(1)
+		return
 	}
 
-	// 初始化输出系统，如果失败则直接退出
 	if err := Common.InitOutput(); err != nil {
 		Common.LogError(fmt.Sprintf("初始化输出系统失败: %v", err))
-		os.Exit(1)
+		return
 	}
 	defer Common.CloseOutput()
 
-	// 执行 CLI 扫描逻辑
 	Core.Scan(Info)
+
+	t := time.Since(start)
+	fmt.Printf("[*] 扫描结束,耗时: %s\n", t)
 }
+
+func main() {}
